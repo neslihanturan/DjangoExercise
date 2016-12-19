@@ -1,0 +1,49 @@
+{% extends 'forum/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static "css/jquery.countdown.css" %}">
+<style type="text/css">
+body > iframe { display: none; }
+#defaultCountdown { width: 240px; height: 45px; }
+</style>
+<!--
+<script src="{% static "js/jquery.plugin.js" %}"></script>
+<script src="{% static "js/jquery.countdown.js" %}"></script>
+-->
+{{survey_offer_form.media}}
+<!--
+<script>
+$(function () {
+	var austDay = new Date();
+	austDay = new Date(austDay.getFullYear() + 1, 1 - 1, 26);
+	$('#defaultCountdown').countdown({until: austDay});
+	$('#year').text(austDay.getFullYear());
+});
+</script>
+-->
+{% if form %}
+      <tr>
+        <!--<div id="defaultCountdown"> </div>-->
+        <form method="POST" action=".">
+          {% csrf_token %}
+          {{ form }}
+          {{ form.field }}
+          <!--<input type=submit  name="submit" value="Submit">-->
+					<td style="vertical-align:bottom"><input class="btn btn-primary likes-button btn-xl" type=submit  name="submit" value="Submit" />
+						</td>
+        </form>
+
+				<!--
+        {% if IS_USER_AUTHENTICATED %}
+        <form method="POST" action=".">
+          {% csrf_token %}
+          {{ survey_offer_form.as_table }}
+          <input type="submit" name="newsurvey" value="New Survey" />
+        </form>
+        {% endif %}
+			-->
+      <tr>
+   {% else %}
+       <p>No surveys are available.</p>
+   {% endif %}
+{% endblock content %}

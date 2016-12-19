@@ -1,0 +1,39 @@
+
+js:
+<script type="text/javascript">
+function changeContent(mid){
+  $.ajax({type: 'GET',
+         url: "{% url 'get_selected_survey' %}",                            // some data url
+         data: {id: mid},       // some params
+         success: function (response) {                  // callback
+             if (response.result === 'OK') {
+                 if (response.data && typeof(response.data) === 'object') {
+                     // do something with the successful response.data
+                     // e.g. response.data can be a JSON object
+                     alert(response.data);
+                 }
+             } else {
+                 // handle an unsuccessful response
+             }
+         }
+        });
+  }
+
+</script>
+
+
+view:
+def get_selected_survey(request):
+    if request.is_ajax():
+        # extract your params (also, remember to validate them)
+        flush_transaction()
+
+        mid = request.POST.get('id', None)
+
+        # construct your JSON response by calling a data method from elsewhere
+        survey = SurveyOffer.objects.get(survey_id = mid )
+
+        return HttpResponse(json.dumps({'result': 'OK', 'data': {'title': survey.title, 'questions': survey.questions}}), content_type="application/json")
+    return HttpResponseBadRequest()
+
+

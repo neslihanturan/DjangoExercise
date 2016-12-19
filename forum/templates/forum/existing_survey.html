@@ -1,0 +1,72 @@
+{% extends 'forum/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+#activate {
+    visibility: "hidden" !important;
+}
+</style>
+
+<link rel="stylesheet" href="{% static "js/jquery-ui.css" %}" type="text/css" media="all" />
+<script src="{% static "js/jquery.min.js" %}" type="text/javascript"></script>
+<script src="{% static "js/jquery-ui.min.js" %}" type="text/javascript"></script>
+
+
+        <div class="ui-widget">
+          <label for="surveys">Saved Surveys: </label>
+          <input id="surveys">
+        </div>
+      <tr>
+
+        <div class="content" id="x">
+        </div>
+        {% csrf_token %}
+        <input type="button" class="btn btn-primary" value="Activate" id="activate">
+
+
+
+<script type="text/javascript">
+function changeContent(title, questions){
+       var newQuestions = questions.replace(new RegExp("~", 'g'), "</br>");
+       document.getElementById("x").innerHTML ="<tr><td><h4>"+title+"<br><small>"+newQuestions+"</small></h4></td></tr>";
+       document.getElementById("activate").visibility = "visible";
+
+}
+
+$(function() {
+    $("#surveys").autocomplete({
+      //var user_id = document.getElementById("usrID");
+      //alert(user_id);
+      source: "/freequestion/get_surveys/",
+      select: function( event, ui ) {
+        selectedId = ui.item.id;
+        selectedTitle = ui.item.label;
+        selectedQuestions = ui.item.value2;
+        survey_id = selectedId
+        changeContent(selectedTitle, selectedQuestions);
+      },
+      minLength: 1,
+    });
+  });
+
+  $('#activate').click(function(){
+    $.ajax({
+        url: "/freequestion/reactivate/",
+        type: 'POST',
+        data: {'survey_id': survey_id,
+                'survey_title': selectedTitle,
+                'survey_questions': selectedQuestions},
+        success: function () {
+             //this gets called when server returns an OK response
+             alert("activated");
+        },
+        error: function () {
+             alert("it didnt work");
+        }
+    });
+});
+</script>
+
+
+{% endblock content %}

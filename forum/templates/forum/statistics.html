@@ -1,0 +1,14 @@
+{% extends 'forum/base.html' %}
+{% load static %}
+
+{% block content %}
+<script src="{% static "js/yui-min.js" %}"></script>
+<script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+</script>
+<td>
+  <h4><a href="#">{{title}}</a><br></h4>
+  {{ chart.as_html }}
+</td>
+
+{% endblock content %}

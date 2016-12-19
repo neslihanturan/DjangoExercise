@@ -1,0 +1,20 @@
+{% extends 'forum/base.html' %}
+{% load static %}
+
+{% block content %}
+<thead>
+  <tr>
+    <th class="cell-stat text-center"></th>
+    <th>
+      <h3>Please Select the User You Want To Communicate</h3>
+    </th>
+  </tr>
+</thead>
+
+  <td class="vert-align" style="vertical-align:center"><form method="POST" action=".">
+    {% csrf_token %}
+    {{form.as_p}}
+    <td style="vertical-align:center"><input class="btn btn-primary likes-button btn-xl" type="submit" name="newsurvey" value="Select User" />
+      </td>
+  </form></td>
+{% endblock content %}

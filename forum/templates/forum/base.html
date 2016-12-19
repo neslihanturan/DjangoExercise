@@ -1,0 +1,48 @@
+
+{% extends user.is_authenticated|yesno:"forum/originbase.html,forum/empty.html" %}
+ {% comment %} {% extends 'forum/originbase.html' %}{% endcomment %}
+{% load static %}
+
+{% block base %}
+{% if user.is_authenticated %}
+{% endif %}
+<div class="container" style="margin-top: 15px">
+<div class="page-header page-heading">
+
+{% if 'survey' in request.build_absolute_uri %}
+	<h1 class="pull-left">FreeSurvey</h1>
+	<ol class="breadcrumb left pull-right where-am-i">
+		<li><a href="{% url 'login' %}">Login</a></li>
+	</ol>
+	<div class="mycontent-right">
+	</div>
+	<ol class="breadcrumb right pull-right where-am-i">
+		<li><a href="{% url 'index' %}">Questions</a></li>
+	</ol>
+	<div class="clearfix"></div>
+	</div>
+	<p class="lead">It is not possible to identify you here.</p>
+	<table class="table forum table-striped">
+
+{% else %}
+	<h1 class="pull-left">FreeQuestion</h1>
+	<ol class="breadcrumb left pull-right where-am-i">
+		<li><a href="{% url 'login' %}">Login</a></li>
+	</ol>
+	<div class="mycontent-right">
+	</div>
+	<ol class="breadcrumb right pull-right where-am-i">
+		<li><a href="{% url 'survey' %}">Survey</a></li>
+	</ol>
+	<div class="clearfix"></div>
+	</div>
+	<p class="lead">This is the right place to ask/comment anonymously.</p>
+	<table class="table forum table-striped">
+{% endif %}
+	<tbody>
+		{% block content %}
+		{% endblock %}
+	</tbody>
+</table>
+</div>
+{% endblock base %}

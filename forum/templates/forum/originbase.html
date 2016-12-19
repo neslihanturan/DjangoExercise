@@ -1,0 +1,112 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="Discussion board built with Twitter Bootstrap using just a few lines of CSS code.
+">
+	<meta name="robots" content="noindex, nofollow">
+	<title>snipplicious - preview</title>
+
+	<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
+	<script src="{% static "js/jquery.js" %}"></script>
+	<script src="{% static "js/bootstrap.min.js" %}"></script>
+	<script src="{% static "js/a71c3b4afb.js" %}"></script>
+	<script type="text/javascript">
+		var infolinks_pid = 2113816;
+		var infolinks_wsid = 1;
+	</script>
+	<script type="text/javascript" src="{% static "js/infolinks_main.js" %}"></script>
+
+	<style>
+		.forum.table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+.forum .fa {
+    width: 1em;
+    text-align: center;
+}
+
+.forum.table th.cell-stat {
+    width: 6em;
+}
+
+.forum.table th.cell-stat-2x {
+    width: 14em;
+}
+.table tbody>tr>td{
+    vertical-align: center;
+}
+.right {
+    border-right: 2px solid #FFFFFF;
+}
+.left {
+    border-left: 2px solid #FFFFFF;
+}
+
+	</style>
+</head>
+<body>
+<script type="text/javascript">
+	( function() {
+		if (window.CHITIKA === undefined) { window.CHITIKA = { 'units' : [] }; };
+		var unit = {"calltype":"async[2]","publisher":"werewolfrex","width":728,"height":90,"sid":"Chitika Default"};
+		var placement_id = window.CHITIKA.units.length;
+		window.CHITIKA.units.push(unit);
+		document.write('<div id="chitikaAdBlock-' + placement_id + '"></div>');
+	}());
+</script>
+<script type="text/javascript" src="{% static "js/getads.js" %}" async></script>
+
+										<nav class="navbar navbar-default">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="#">#freequestion</a>
+                            </div>
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Account
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                                <a href="{% url 'index' %}">Home</a>
+                                            </li>
+																						<li>
+																								<a href="{% url 'survey' %}">Display Active Survey</a>
+																						</li>
+																						<li class="divider"></li>
+                                            <li>
+                                                <a href="{% url 'prepare' %}">Prepare a Survey</a>
+                                            </li>
+																						<li>
+																								<a href="{% url 'existing_survey' %}">Activate Existing Survey</a>
+																						</li>
+                                            <li>
+                                                <a href="{% url 'get_statistics' %}">Display Statistics</a>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li>
+                                                <a href="/freequestion/logout">Logout</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+
+                    {% block base %}
+                		{% endblock %}
+</div>
+</body>
+</html>

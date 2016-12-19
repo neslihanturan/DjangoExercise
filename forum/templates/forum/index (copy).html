@@ -1,0 +1,49 @@
+
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{% static "js/rango-ajax.js" %}"></script>
+
+    <style>
+h3 {
+    text-shadow: 2px 2px red;
+}
+div {
+   box-shadow: 10px 10px 5px grey;
+}
+</style>
+
+</head>
+<div class="col-sm-8">
+  <h3>Column 3</h3>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elicccccccLorem ipsum dolor sit amet, consectetur adipisicing elicccccccLorem ipsum dolor sit amet, consectetur adipisicing eliccccccccccccccdcccccccccccccccccccccccccccccccccccccccct...</p>
+  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+</div>
+
+{% if latest_post_list %}
+    <ul>
+    {% for post in latest_post_list %}
+          <li>{{post.title}}</li>
+              {{post.description}}</br>
+
+              <button class="btn btn-default likes-button" type="button" data-postid="{{post.id}}">
+                like
+              </button>
+               <strong id="{{post.id}}">{{ post.votes }}</strong>
+        </br>
+    {% endfor %}
+    </ul>
+    <form  method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" name="newpost" value="Submit" />
+
+{% else %}
+    <p>No post are available.</p>
+{% endif %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="{% static "js/rango-ajax.js" %}"></script>

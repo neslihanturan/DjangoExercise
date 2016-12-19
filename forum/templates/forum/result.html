@@ -1,0 +1,15 @@
+{% extends 'forum/base.html' %}
+{% load static %}
+
+{% block content %}
+{% if result %}
+      <tr>
+        <th class="cell-stat"></th>
+        <th>
+          <h3>Thanks for your contribution</h3>
+        </th>
+      <tr>
+   {% else %}
+       <p>No results are available.</p>
+   {% endif %}
+{% endblock content %}
